@@ -122,8 +122,8 @@ int main(int argc, char **argv)
 
         msg_size = socket_receive(connection_fd, buf);
         printf("TCP server ha ricevuto %d byte: %s\n", msg_size, buf);
-        printf("Rimandiamo indietro il messaggio");
-        byte_sent = socket_send(connection_fd, buf);
+        printf("Rimandiamo indietro il messaggio\n");
+        msg_size = socket_send(connection_fd, buf);
 
         if(socket_send(connection_fd, buf)==0){
             printf("Nessun dato inviato");
