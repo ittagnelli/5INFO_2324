@@ -124,7 +124,7 @@ int main(int argc, char **argv)
 
         if(socket_send(connection_fd, buf)==0)
         {
-            printf("Nessun dato inviato")
+            printf("Nessun dato inviato");
         }
 
         /* chiudo la connessione con il client */
