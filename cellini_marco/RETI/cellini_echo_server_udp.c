@@ -60,18 +60,21 @@ int socket_receive(int socket_fd, char *buf)
     memset(&clientaddr, '0', sizeof(clientaddr));
 
     bzero(buf, BUFSIZE);
-    if ((msg_size = recvfrom(socket_fd, buf, BUFSIZE, 0,
-         (struct sockaddr*)&clientaddr, &client_struct_len)) < 0)
+
+    client_struct_len = sizeof(clientaddr);
+    if ((msg_size = recvfrom(socket_fd, buf, BUFSIZE, MSG_WAITALL, (struct sockaddr*)&clientaddr, &client_struct_len)) < 0)
         error("Errore nella ricezione dati");
     
     src_info = clientaddr;
+
+    printf("\nLa porta del mittente e':\t%d\n", htons(src_info.sin_port));
 
     return msg_size;
 }
 
 int answer(int socket_fd, char *buf) {
     int byte_sent;
-    if((byte_sent = sendto(socket_fd, buf, strlen(buf), 0, (struct sockaddr*)&src_info, sizeof(src_info))) < 0)
+    if((byte_sent = sendto(socket_fd, buf, strlen(buf), MSG_CONFIRM, (struct sockaddr*)&src_info, sizeof(src_info))) < 0)
         perror("Errore rinvio messaggio");
     return byte_sent;
 }
