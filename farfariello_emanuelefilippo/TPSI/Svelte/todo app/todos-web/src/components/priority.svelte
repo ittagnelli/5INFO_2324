@@ -1,6 +1,4 @@
-<span class="ALTA">
-    ALTA
-</span>
+
 
 <style>
     span {
@@ -20,4 +18,26 @@
         background-color: red;
     }
 
+    .MEDIA{
+        background-color: orange;
+    }
+
+    .BASSA{
+        background-color: green;
+    }
 </style>
+
+<script> 
+    export let prio = 3; 
+    const prio2str = (prio) => { 
+        let map= { 
+            1: 'ALTA', 2: 'MEDIA', 3: 'BASSA' 
+        } 
+        return map[prio]; } 
+        const change_prio = () => 
+        { prio = (prio + 1) % 3 + 1; } 
+        </script> 
+        
+        <span class={prio2str(prio)} on:click={change_prio}> 
+            {prio2str(prio)} 
+        </span>
