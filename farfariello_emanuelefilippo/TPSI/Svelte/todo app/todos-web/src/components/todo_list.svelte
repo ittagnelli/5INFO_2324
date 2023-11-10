@@ -30,7 +30,7 @@
 
 </script>
 
-<h1 class='app-title'> TodoItem </h1>
+<h1 class='app-title'> TODOS </h1>
 <div class="todo-list">
     <div class = "heder"> <Icon name = "tag" /></div>
     <div class = "heder"> <Icon name = "task_alt" /></div>

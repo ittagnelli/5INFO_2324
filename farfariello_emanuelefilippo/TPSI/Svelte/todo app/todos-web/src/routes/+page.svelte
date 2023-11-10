@@ -1,7 +1,7 @@
 
 <style> 
     main{
-        border: 3px solid black;
+        border: 0px solid black;
         width: 60%;
         height: 90vh;
         margin: auto;
