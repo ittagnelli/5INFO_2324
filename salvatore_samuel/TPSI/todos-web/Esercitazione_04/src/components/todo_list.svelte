@@ -11,41 +11,11 @@
     <div class="header"><Icon/></div>
     <div class="header"><Icon/></div>
  
-<TodoItem/>
+    <TodoItem/>
 
-<TodoItem/>
+    <TodoItem/>
 
-<TodoItem/>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
+    <TodoItem/>
 
 </div>
 <style>

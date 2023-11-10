@@ -11,8 +11,8 @@
         width: 100px;
         height: 30px;
     }
-    
-    span :hover {
+
+    span:hover {
         cursor: pointer;
     }
 
