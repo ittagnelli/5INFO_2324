@@ -27,9 +27,10 @@
 </script>
 
 <h1>ToDos</h1>
+
 <div class="todo-list">
     <div class="header"><Icon name="tag" /></div>
-    <div class="header"><Icon name="task_all" /></div>
+    <div class="header"><Icon name="task_alt" /></div>
     <div class="header"><Icon name="list" /></div>
     <div class="header"><Icon name="schedule" /></div>
     <div class="header"><Icon name="add_box" handler={create_todo}/></div>
