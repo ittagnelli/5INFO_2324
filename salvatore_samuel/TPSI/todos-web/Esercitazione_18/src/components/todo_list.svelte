@@ -14,7 +14,7 @@
             priority: 3
         };
         console.log("CREATE:", todo);
-
+        localStorage.setItem(`todo${todo.id}`, JSON.stringify(todo));
         todos =[...todos, todo];
     }
     const change_todo_item = async (e) => {
