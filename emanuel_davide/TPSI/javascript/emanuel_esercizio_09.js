@@ -1,18 +1,9 @@
-function loginUser() {
-    var username = prompt("Inserisci il tuo nome utente:");
-    var password = prompt("Inserisci la tua password:");
+let user =prompt("USERNAME");
+user || alert("Canceled");
+user == false || user == "Admin" || alert ("I don't know");
 
-    // Controlla se le credenziali sono corrette (puoi modificare questa logica a seconda delle tue esigenze)
-    if (username === "utente" && password === "password") {
-        alert("Accesso riuscito! Benvenuto, " + username + "!");
-    } else {
-        alert("Accesso non riuscito. Nome utente o password errati.");
-    }
-}
-
-// Chiamato al caricamento della pagina
-window.onload = function() {
-    // Aggiungi un evento al clic del pulsante di login
-    var loginButton = document.getElementById("loginButton");
-    loginButton.addEventListener("click", loginUser);
-};
+user == "Admin" && (password == prompt("PASSWORD"))
+password ||alert ("Canceled");
+password == "Master" ||alert("Wrong password")
+password == "Master" && alert("Welcome!")
+ 
