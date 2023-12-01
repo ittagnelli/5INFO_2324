@@ -1,0 +1,6 @@
+push.sh
+gitconfig.sh
+*.exe
+*.out
+.vscode/
+.DS_Store
