@@ -1,7 +1,7 @@
 <script>
     let p = "", q = "";
     let N = 0, V = 0;
-    let Npriv = "", Npub = "";
+    let Npriv = "", Npub = 0;
     let clear = "", asciiValues = [];
     let c = "", m = [];
 
@@ -28,6 +28,26 @@
         const factors2 = Array.from({ length: number2 + 1 }, (_, i) => i).filter(i => number2 % i === 0);
 
         return factors1.filter(factor => factors2.includes(factor) && factor !== 1);
+    };
+
+    const generateRandomCoprime = (maxValue) => {
+        let randomNum = generateRandomPrime(maxValue);
+
+        while (commonFactors(randomNum, V).length !== 0) {
+            randomNum = generateRandomPrime(maxValue);
+        }
+
+        return randomNum;
+    };
+
+    const generateRandomPrime = (maxValue) => {
+        let randomNum = Math.floor(Math.random() * maxValue);
+
+        while (!isPrime(randomNum)) {
+            randomNum++;
+        }
+
+        return randomNum;
     };
 
     const convertToAscii = () => {
@@ -59,24 +79,28 @@
             N = p * q;
             V = (p-1)*(q-1);
 
-            if (Npriv != 0 && validateNumberInput(Npriv)) {
-                const factors = commonFactors(Npriv, V);
-                const isMatch = JSON.stringify(factors[0]) === JSON.stringify(factors[1]);
+            Npriv = Npriv || generateRandomCoprime(V);
 
-                if (!isMatch) {
-                    Npriv = 0;
-                }
+            let decryptionSuccess = false;
 
-                for (let foundNpub = 2; foundNpub < V; foundNpub++) {
+            for (let foundNpub = 2; foundNpub < V; foundNpub++) {
                     if ((foundNpub * Npriv) % V === 1) {
-                        Npub = foundNpub;
-                        break;
-                    } 
-                }
-
-                c = encryptMessage(asciiValues, Npub, N);
-                m = dencryptMessage(c, Npriv, N);
+                    Npub = foundNpub;
+                    decryptionSuccess = true;
+                    break;
+                } 
             }
+
+            if (!decryptionSuccess) {
+                Npriv = generateRandomCoprime(V);
+            }
+
+            while (Npub === Npriv) {
+                Npub = generateRandomCoprime(V);
+            }
+
+            c = encryptMessage(asciiValues, Npub, N);
+            m = dencryptMessage(c, Npriv, N);
         }
     }
 </script>
@@ -97,7 +121,6 @@
         V = {V} 
     </div>
     <div>
-        Inserire il valore di Npriv: <input bind:value={Npriv} on:input={() => validateNumberInput(Npriv)}><br>
         Il valore di Npriv è di: {Npriv}
     </div>
     <div>
@@ -136,7 +159,7 @@
     }
 
     input{
-        width: 5em;
+        width: 6em;
         text-align: center;
     }
 </style>
