@@ -1,81 +1,69 @@
 <script>
-    let p, q, n, v, npriv, npub=0, chiaro=[], crypto="", ascii=[], ascii1=[], deascii=[], potenza, chiaro1="";
+    let p, q, n, v, npriv, npub=0, chiaro=[], crypto="", ascii=[], deascii_chiaro=[], deascii_crypto=[], decrypto="";
     $:n=q*p;
     $:v=(q-1)*(p-1);
     const calcola = () => {
-        npub=0;
-        let mq=q, mp=p, mnpriv=npriv, status=true;
-        for(;;){
-            mq--
-            if(q%mq==0){status=false;break;}
-            else if(mq==2){break;}
-        }
-        for(;;){
-            mp--
-            if(p%mp==0){status=false;break;}
-            else if(mp==2){break;}
-        }
-        for(;;){
-            mnpriv--
-            if(npriv%mnpriv==0){status=false;break;}
-            else if(mnpriv==2){break;}
-        }
-        if(!status || p==q || q==npriv){
-            q=undefined;
-            p=undefined;
-            npriv=undefined;
-            alert("Non valido!!!");
-        }
+        if(!p || !q || !npriv){alert("Valori non inseriti!!!");}
         else{
-            for(;;){
-                npub++;
-                if((npub*npriv)%v==1 && npriv!=npub){break;}
+            npub=0;
+            if(p==q || q==npriv || !primo(p) || !primo(q) || !primo(npriv)){
+                alert("Non valido!!!");
             }
-            if(!chiaro){alert("Messaggio inesistente!!!");}
             else{
-                ascii=ascii_f(chiaro);
-                for(var i=0;i<ascii.length;i++){
-                    potenza=BigInt(ascii[i])**BigInt(npub);
-                    deascii[i]=Number(potenza%BigInt(n));
+                for(;;){
+                    npub++;
+                    if((npub*npriv)%v==1 && npriv!=npub){break;}
                 }
-                for(var i=0;i<deascii.length;i++){
-                    potenza=BigInt(deascii[i])**BigInt(npriv);
-                    ascii1[i]=Number(potenza%BigInt(n));
+                if(!chiaro){alert("Messaggio inesistente!!!");}
+                else{
+                    ascii=ascii_f(chiaro);
+                    deascii_crypto=encrypt(ascii, npub, n);
+                    deascii_chiaro=decrypt(deascii_crypto, npriv, n);
+                    crypto=deascii_f(deascii_crypto);
+                    decrypto=deascii_f(deascii_chiaro);
                 }
-                crypto=deascii_f(deascii);
-                chiaro1=deascii_f(ascii1)
-
             }
+        }
+    }
+    function primo(n){
+        let m=n;
+        for(;;){
+            m--;
+            if(n%m==0){return false;}
+            else if(m==2){return true;}
         }
     }
     function ascii_f(chiaro){
         ascii = [];
-        deascii = [];
+        deascii_crypto = [];
+        deascii_chiaro = [];
         for(var i=0;i<chiaro.length;i++){
             const carattere = chiaro.charCodeAt(i);
             ascii.push(carattere);
         }
         return ascii;
     }
+    function encrypt(ascii, npub, n){
+        let potenza;
+        for(var i=0;i<ascii.length;i++){
+            potenza=BigInt(ascii[i])**BigInt(npub);
+            deascii_crypto[i]=Number(potenza%BigInt(n));
+        }
+        return deascii_crypto;
+    }
+    function decrypt(deascii, npriv, n){
+        let potenza;
+        for(var i=0;i<deascii_crypto.length;i++){
+            potenza=BigInt(deascii_crypto[i])**BigInt(npriv);
+            deascii_chiaro[i]=Number(potenza%BigInt(n));
+        }
+        return deascii_chiaro;
+    }
     function deascii_f(deascii){
         const crypto = String.fromCharCode(...deascii);
         return String(crypto);
     }
 </script>
-
-<!--function ascii(chiaro){
-        chiaro = [];
-        for(var i=0;i<chiaro.length;i++){
-            const carattere = chiaro.charCodeAt(i);
-            chiaro.push(carattere);
-        }
-        return chiaro;
-    }
-    function deascii_f(ascii) {
-        const deascii = String.fromCharCode(...ascii);
-        return deascii;
-    }
--->
 
 <main>
     <div>P:<input type="text" bind:value={p}></div>
@@ -90,9 +78,9 @@
     <div class="risultato">Chiaro:{chiaro}</div>
     <div class="risultato">Cryptato:{crypto}</div>
     <div class="risultato">Chiaro&#40;ASCII&#41;:{ascii}</div>
-    <div class="risultato">Cryptato&#40;ASCII&#41;:{deascii}</div>
-    <div class="risultato">Decryptato&#40;ASCII&#41;:{ascii1}</div>
-    <div class="risultato">Decryptato:{chiaro1}</div>
+    <div class="risultato">Cryptato&#40;ASCII&#41;:{deascii_crypto}</div>
+    <div class="risultato">Decryptato&#40;ASCII&#41;:{deascii_chiaro}</div>
+    <div class="risultato">Decryptato:{decrypto}</div>
     <div><button class="calcola" on:click={calcola}>Calcola</button></div>
 </main>
 
