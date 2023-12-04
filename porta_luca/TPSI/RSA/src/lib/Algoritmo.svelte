@@ -4,16 +4,13 @@
     $:v=(q-1)*(p-1);
     const calcola = () => {
         if(!p || !q || !npriv){alert("Valori non inseriti!!!");}
+        else if(p<7 || q<7 || npriv<7){alert("Valore troppo piccolo!!!");}
         else{
-            npub=0;
-            if(p==q || q==npriv || !primo(p) || !primo(q) || !primo(npriv)){
+            if(p==q || q==npriv || p==npriv || !primo(p) || !primo(q) || !primo(npriv)){
                 alert("Non valido!!!");
             }
             else{
-                for(;;){
-                    npub++;
-                    if((npub*npriv)%v==1 && npriv!=npub){break;}
-                }
+                npub=chiave_pubblica(npub, npriv, v);
                 if(!chiaro){alert("Messaggio inesistente!!!");}
                 else{
                     ascii=ascii_f(chiaro);
@@ -32,6 +29,14 @@
             if(n%m==0){return false;}
             else if(m==2){return true;}
         }
+    }
+    function chiave_pubblica(npub, npriv, v){
+        npub=0;
+        for(;;){
+            npub++;
+            if((npub*npriv)%v==1 && npriv!=npub){break;}
+        }
+        return npub;
     }
     function ascii_f(chiaro){
         ascii = [];
@@ -66,21 +71,21 @@
 </script>
 
 <main>
-    <div>P:<input type="text" bind:value={p}></div>
-    <div>Q:<input type="text" bind:value={q}></div>
-    <div>Npriv:<input type="text" bind:value={npriv}></div>
-    <div>Npub:{npub}</div>
-    <div class="risultato">N: {n}</div>
-    <div class="risultato">V: {v}</div>
-    <div class="risultato">Kpriv:({n},{npriv})</div>
-    <div class="risultato">Kpub:({n},{npub})</div>
-    <div class="calcola">Messaggio: <input type="text" bind:value={chiaro}></div>
-    <div class="risultato">Chiaro:{chiaro}</div>
-    <div class="risultato">Cryptato:{crypto}</div>
-    <div class="risultato">Chiaro&#40;ASCII&#41;:{ascii}</div>
-    <div class="risultato">Cryptato&#40;ASCII&#41;:{deascii_crypto}</div>
-    <div class="risultato">Decryptato&#40;ASCII&#41;:{deascii_chiaro}</div>
-    <div class="risultato">Decryptato:{decrypto}</div>
+    <div><span>P</span>:<input type="text" bind:value={p}></div>
+    <div><span>Q</span>:<input type="text" bind:value={q}></div>
+    <div><span>Npriv</span>:<input type="text" bind:value={npriv}></div>
+    <div><span>Npub</span>:{npub}</div>
+    <div class="risultato"><span>N</span>: {n}</div>
+    <div class="risultato"><span>V</span>: {v}</div>
+    <div class="risultato"><span>Kpriv</span>:({n},{npriv})</div>
+    <div class="risultato"><span>Kpub</span>:({n},{npub})</div>
+    <div class="calcola"><span>Messaggio</span>: <input type="text" bind:value={chiaro}></div>
+    <div class="risultato"><span>Chiaro</span>:<br>{chiaro}</div>
+    <div class="risultato"><span>Cryptato</span>:<br>{crypto}</div>
+    <div class="risultato"><span>Chiaro&#40;ASCII&#41;</span>:<br>{ascii}</div>
+    <div class="risultato"><span>Cryptato&#40;ASCII&#41;</span>:<br>{deascii_crypto}</div>
+    <div class="risultato"><span>Decryptato&#40;ASCII&#41;</span>:<br>{deascii_chiaro}</div>
+    <div class="risultato"><span>Decryptato</span>:<br>{decrypto}</div>
     <div><button class="calcola" on:click={calcola}>Calcola</button></div>
 </main>
 
@@ -88,6 +93,7 @@
     main{
         height: 80%;
         color: blue;
+        font-size: 50px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
@@ -108,6 +114,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-decoration: none;
     }
     div{
         width: 25%;
@@ -117,4 +124,5 @@
     .risultato{width: 50%;}
     .calcola{width: 100%;}
     .calcola input{width: 50%;}
+    span{text-decoration: underline;}
 </style>
