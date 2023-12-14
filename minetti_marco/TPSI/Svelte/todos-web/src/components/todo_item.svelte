@@ -5,18 +5,28 @@
     import Priority from "./priority.svelte";
 
     export let todo;
+    let old_priority = todo.priority;
     const dispatch = createEventDispatcher();
 
     const item_change = (type) => {
-        dispatch('change', {type: type, id: todo.id});
+        dispatch('update', {type: type, id: todo.id});
     }
 
     const toggle_status = () => {
         todo.done = !todo.done;
+        item_change('update');
     }
 
     const edit_task = () => {
         document.getElementById(todo.id).blur();
+        item_change('update');
+    }
+
+    $: {
+        if(todo.priority != old_priority) {
+            old_priority = todo.priority;
+            item_change('update');
+        }
     }
 </script>
 <Cell>
@@ -33,7 +43,7 @@
 
 <Cell>
     <input type="text"
-    class="todo-item-input-text"
+    class="todo-item-input-text {todo.done == true ? 'text-done' : ''}"
     id="{todo.id}"
     placeholder="Inserisci il nuovo ToDo"
     bind:value={todo.task}
@@ -41,7 +51,7 @@
 </Cell>
 
 <Cell>
-    <Priority/>
+    <Priority bind:prio = {todo.priority} disabled = {todo.done}/>
 </Cell>
 
 <Cell last>
@@ -50,6 +60,12 @@
 
 
 <style>
+
+    .text-done {
+        text-decoration: line-through;
+        opacity: 0.3;
+    }
+
     .todo-item-input-text { 
         border: none;
         width: 90%;
