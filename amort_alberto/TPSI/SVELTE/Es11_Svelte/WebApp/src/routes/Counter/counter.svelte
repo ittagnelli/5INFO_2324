@@ -1,5 +1,5 @@
 <svelte:head>
-    <link href="https://fonts.googleapis.com/css2?
+    <link href="https://fonts.googleapis.com/css2? 
     family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet"/> 
 
     <link href="https://fonts.googleapis.com/css2?
@@ -7,14 +7,23 @@
 </svelte:head>
 
 <script>
-	let counter = 0; // stato di un contatore
+	export let counter = 0; // stato di un contatore
+    function counter_incr(){
+        counter += 1;
+    }
+
+    function counter_decr()
+    {
+        counter -= 1;
+
+    }
     
 </script>
 
 <div class="container">
     <div class="pulsante">
-    <button>
-        <span class="material-symbols-outlined icon">remove </span>
+    <button on:click={counter_decr}>
+        <span class="material-symbols-outlined icon">remove</span>
     </button>
 </div>
 <div class="number">
@@ -22,7 +31,9 @@
 </div>
 
 <div class="pulsante">
-    <span class="material-symbols-outlined icon">add </span>
+    <button on:click={counter_incr}>
+    <span class="material-symbols-outlined icon">add</span>
+</button>
 </div>
 </div>
 

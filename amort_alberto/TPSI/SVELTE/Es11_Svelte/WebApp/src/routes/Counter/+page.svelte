@@ -2,12 +2,14 @@
 <script>
     import Counter from "./counter.svelte";
 
-	let counter = 0; // stato di un contatore
+	let contatore = 0; // stato di un contatore
     function incremente() {
-        counter++;
+        contatore++;
     }
 </script>
 
 <h1>Page Counter !!!</h1>
 
-<Counter/>
+<h2>il valore del contatore vale: {contatore}</h2>
+
+<Counter bind:counter={contatore}/>

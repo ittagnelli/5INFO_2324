@@ -54,20 +54,28 @@ int socket_receive(int socket_fd, char *buf)
 {
     int msg_size;
     struct sockaddr_in clientaddr; /* client address */
-    socklen_t client_struct_len; /* lunghezza dell'indirizzo del client */
-  
-    /* inizializza la struttura che contiene le informazioni del socket */
-    memset(&clientaddr, '0', sizeof(clientaddr));
+    socklen_t client_struct_len = sizeof(clientaddr); /* lunghezza dell'indirizzo del client */
 
-    bzero(buf, BUFSIZE);
+    /* inizializza la struttura che contiene le informazioni del socket con zeri */
+    memset(&clientaddr, 0, sizeof(clientaddr));
+
+    msg_size = 0; // Inizializza la dimensione dei dati a zero
+
     if ((msg_size = recvfrom(socket_fd, buf, BUFSIZE, 0,
          (struct sockaddr*)&clientaddr, &client_struct_len)) < 0)
         error("Errore nella ricezione dati");
-    
+
+    // Rimuovi il terminatore nullo se presente
+    if (msg_size > 0 && buf[msg_size - 1] == '\0') {
+        msg_size--; // Decrementa la dimensione del messaggio
+        buf[msg_size] = '\0'; // Assicurati che non ci sia un terminatore nullo
+    }
+
     src_info = clientaddr;
 
     return msg_size;
 }
+
 
 int answer(int socket_fd, char *buf) {
     int byte_sent;
@@ -100,7 +108,7 @@ int main(int argc, char **argv)
     printf("Server UDP pronto e in ascolto sulla porta %d\n\n", udp_port);
     for(;;) {
         msg_size = socket_receive(socket_fd, buf);
-        printf("UDP server ha ricevuto %d byte: %s\n\nInvio risposta", msg_size, buf);
-        printf("Risposta al mittente, byte inviati:\t%d\n", answer(socket_fd, buf));
+        printf("UDP server ha ricevuto %d byte: %s\nInvio risposta\n", msg_size, buf);
+        printf("Risposta al mittente inviata, byte inviati:\t%d\n", answer(socket_fd, buf));
     }
 }

@@ -1,0 +1,21 @@
+Dopo aver deciso una chiave e un IV scrivo il comando per ricevere il messaggio da decifrare:
+
+entro nella cartella dove si trova il file ricevuto.txt:
+cd Scrivania/RETI
+
+prendo il mio id per passarlo al cifratore per inviarmi il messaggio:
+hostname -I
+
+nc -l 8080 | openssl enc -des -d  -K 3d4325a3676f34bb  -iv be1d78bd53f11a02 -a -provider legacy -provider default > ricevuto.txt
+
+
+Adesso decifro il messaggio usando questo comando:
+openssl enc -des -d  -K 3d4325a3676f34bb  -iv be1d78bd53f11a02  -a -provider legacy -provider default  -in ricevuto.txt -out clear.txt
+
+Adesso devo decriptare per rimandare il messaggio (se hai ancora il file criptato non serve):
+openssl enc -des -e  -K 3d4325a3676f34bb  -iv be1d78bd53f11a02  -a -provider legacy -provider default  -in clear.txt -out chyper.txt
+
+adesso lo invio:
+openssl enc -des -e  -K 3d4325a3676f34bb  -iv be1d78bd53f11a02 -a -provider legacy -provider default -in ricevuto.txt  | nc -N 10.10.10.117 8080
+
+

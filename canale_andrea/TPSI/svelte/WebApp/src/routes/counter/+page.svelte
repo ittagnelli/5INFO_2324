@@ -1,17 +1,17 @@
 <script>
-    let counter = 0;
+    import { counter_index } from "../../lib/store";
 
     function add() {
-        counter++;
+        $counter_index++;
     }
 
     function remove() {
-        counter--;
+        $counter_index--;
     }
 </script>
 <div class="counter">
     <button on:click={remove}>-</button>
-    <p>{counter}</p>
+    <p>{$counter_index}</p>
     <button on:click={add}>+</button>
 </div>
 

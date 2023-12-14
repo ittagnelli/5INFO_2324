@@ -19,6 +19,7 @@
                 <li><a href="/chisono">Chi sono</a></li>
                 <li><a href="/counter">Counter</a></li>
                 <li><a href="/about">About</a></li>
+                <li><a href="/input">Input</a></li>
             </ul>
         </nav>
         <article>

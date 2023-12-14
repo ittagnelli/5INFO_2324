@@ -37,6 +37,7 @@ int socket_create()
 int socket_send(int socket_fd, char *ip, unsigned short port, char *buf) 
 {
     struct sockaddr_in serveraddr; /* indirizzo e porta server */  
+    memset(&serveraddr, 0, sizeof(serveraddr));
     int byte_sent;
 
      /* prepara le informazioni sulla destinazioen del datagram */
@@ -54,7 +55,7 @@ int socket_send(int socket_fd, char *ip, unsigned short port, char *buf)
 int wait_receive(int socket_fd, char *buf) {
     int byte_receive;
     struct sockaddr_in clientaddr;
-    socklen_t client_struct_len;
+    socklen_t client_struct_len = sizeof(clientaddr);
     if ((byte_receive = recvfrom(socket_fd, buf, BUFSIZE, 0,
          (struct sockaddr*)&clientaddr, &client_struct_len)) < 0)
         error("Errore nella ricezione dati");
@@ -88,7 +89,7 @@ int main(int argc, char **argv)
     printf("Inviato %d bytes con successo a %s\n\nIn attesa di risposta dal server.........\n", byte_sent, ip);
     
     wait_receive(socket_fd, buf);
-    printf("%s", buf);
+    printf("%s\n", buf);
 
     close(socket_fd);
 }

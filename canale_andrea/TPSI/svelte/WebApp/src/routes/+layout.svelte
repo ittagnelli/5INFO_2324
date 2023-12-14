@@ -8,7 +8,7 @@
             <ul>
                 <li><a href="#">Chi sono</a></li>
                 <li><a href="/counter">Counter</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="/about">About</a></li>
             </ul>
         </nav>
 
