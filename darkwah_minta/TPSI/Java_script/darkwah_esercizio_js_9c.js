@@ -9,6 +9,17 @@ let Utente = function (marca, modello, anno, n_propet, tipo) {
     }),
     (this.bloc = function () {
         console.log(`>> Auto ${this.marca} ${this.modello} dell'${this.anno} di ${this.n_propet} tipologia ${this.tipo} verrà bloccato in India`);
+      }),
+    (this.conclus = function () {
+        console.log(`>> Auto ${this.marca} ${this.modello} dell'${this.anno} di ${this.n_propet} tipologia ${this.tipo} è stato concluso`);
+      }),
+    (this.enumera = function () {
+        let lung = Object.keys(this);
+
+        for (let i = 0; i < lung.length; i++)
+        {
+            console.log("chiave = " + lung[i]);
+        }
     })
 };
 
@@ -19,4 +30,4 @@ let utente3 = new Utente("Stellantis", "Roma","2021","Samanta","ibrida");
 
 utente1.prod();
 utente2.bloc();
-utente3.prod();
+utente3.enumera()
