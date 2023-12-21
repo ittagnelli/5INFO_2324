@@ -15,7 +15,6 @@
 <style>
   main{
     color: red;
-    font-size: 50px;
     width: 100%;
     height: 97vh;
     margin: auto;
@@ -24,5 +23,5 @@
     align-items: center;
     justify-content: space-around;
   }
-  h1{font-family: 'Agbalumo';}
+  h1{font-family: 'Agbalumo';font-size: 100px !important;}
 </style>
