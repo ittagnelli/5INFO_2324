@@ -10,8 +10,6 @@ let Macchina = function (targa, tipo, colore, porte, anno_fabbricazione) {
 
     });
     
-    
-    
   };
 
   let macchina1 = new Macchina("DV945BV", "Fiat", "Azzurra", "5", "2002");
