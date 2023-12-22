@@ -10,6 +10,7 @@
     
     $open = status;
     function open_close() {
+	console.log("open = " + $open.toString() + "\nstatus = " +  status.toString());
         if (!$open) {
             $open = status = true;
         } else if (status){
