@@ -1,9 +1,11 @@
 let str = "Matteo Licciardino";
 
 const abbr = (str) => {
-    let punto = "."
+    let parole = str.split(" ");
+    let initUsername = parole[1].charAt(0).toUpperCase();
+    let nameAbbr = parole[0] + " " + initUsername + ".";
 
-    console.log(str.substring(0, 8).split(" ").concat(punto));
+    console.log(nameAbbr);
 }
 
-abbr(str)
+abbr(str);
