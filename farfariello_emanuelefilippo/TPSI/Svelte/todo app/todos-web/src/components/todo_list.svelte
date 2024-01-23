@@ -2,6 +2,7 @@
 <script>
     import Icon from "./icon.svelte";
     import TodoItem from "./todo_item.svelte";
+    import { onMount } from "svelte";
 
     
     let todos = [];
@@ -16,17 +17,49 @@
         }
 
     console.log("CREATE:", todo);
+    localStorage.setItem(`todos${todo.id}`, JSON.stringify(todo));
     todos = [...todos, todo];
     };
 
     const change_todo_item = async (e) => {
-        delete_item(e.detail.id);
+        switch (e.detail.type){
+            case 'update':
+            update_item (e.detail.id);
+            break;
+            case 'delete' :
+            delete_item(e.detail.id);
+            break;
+        }
+    }
+    
+    const update_item = (id) => {
+        console.log ("UPDATE: ", id);
+
+        const todo = todos.filter (t => t.id == id ) [0];
+        localStorage.setItem(`todo${id}`, JSON.stringify(todo));
     }
 
     const delete_item = (id) => {
         console.log('DELETE', id);  
         todos = todos.filter(t => t.id != id); 
+
+        localStorage.removeItem(`todo${id}`);
     }
+
+    onMount (async() => {
+        for (let i= 0; i<localStorage.length; i++){
+            const key = localStorage.key(i);
+            const keyn = +key.substring(4);
+
+            if(keyn >= last_id)
+                last_id = keyn;
+
+            const todo = JSON.parse(localStorage.getItem(key));
+            if (todo != null)
+                todos.push(todo);
+        }
+        todos= [...todos];
+    });
 
 </script>
 
