@@ -1,4 +1,4 @@
-let frase = "ciamo mondo!!!"
+let frase = "ciao mondo!!!"
 
 function upper_case(frase) {
     let ris = "";
