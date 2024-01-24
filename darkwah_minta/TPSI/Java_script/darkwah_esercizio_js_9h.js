@@ -7,3 +7,9 @@ function maggiore(prima, seconda)
 }
 
 console.log(maggiore(a, b))
+a = 44
+b = 37
+console.log(maggiore(a, b))
+a = 33
+b = 34
+console.log(maggiore(a, b))
