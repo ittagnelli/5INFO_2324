@@ -11,6 +11,10 @@ let utente = {
 
 
   for(let chiave = 0; chiave < chiavi.length; chiave++) {
-    console.log(`chiave => ${chiavi[chiave]}\nvalue => ${utente[chiavi[chiave]]}\n`);
+
+    let key = chiavi[chiave];
+    let value = utente[key];
+
+    console.log(`chiave : ${key} value : ${value}\n`);
 }
 
