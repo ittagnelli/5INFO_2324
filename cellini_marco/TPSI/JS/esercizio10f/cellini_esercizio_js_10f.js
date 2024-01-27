@@ -1,8 +1,9 @@
 const upper_case = (ph) => {
-    let splitted = ph.split(' ');
-    let final = '';
-    splitted.filter((e, _) => final += `${e.toUpperCase()} `);
-    return final;  
+    let ris = '';
+    ph.split('').filter((e, i) => {
+        e.charCodeAt(0) >= 97 && e.charCodeAt(0) <= 122 ? ris += String.fromCharCode(e.charCodeAt(0) - 32) : ris += e;
+    });
+    return ris;
 };
 
 let sentence = 'ciao mondo!!!';
