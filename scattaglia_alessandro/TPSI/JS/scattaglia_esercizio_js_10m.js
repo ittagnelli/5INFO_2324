@@ -1,5 +1,4 @@
-function concatenateN(str) {
-    let n = 4;
+function concatenateN(str,n) {
     console.log(str.repeat(n));
 }
-concatenateN("ciao!!");
+concatenateN("ciao!!",4);
