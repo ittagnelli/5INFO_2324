@@ -1,61 +1,68 @@
 <script>
-    let p, q, n, v, npriv, npub=0, chiaro=[], crypto="", ascii=[], ascii1=[], deascii=[], potenza, chiaro1="";
+    let p, q, n, v, npriv, npub=0, chiaro=[], crypto="", ascii=[], deascii_chiaro=[], deascii_crypto=[], decrypto="";
     $:n=q*p;
     $:v=(q-1)*(p-1);
     const calcola = () => {
-        npub=0;
-        let mq=q, mp=p, mnpriv=npriv, status=true;
-        for(;;){
-            mq--
-            if(q%mq==0){status=false;break;}
-            else if(mq==2){break;}
-        }
-        for(;;){
-            mp--
-            if(p%mp==0){status=false;break;}
-            else if(mp==2){break;}
-        }
-        for(;;){
-            mnpriv--
-            if(npriv%mnpriv==0){status=false;break;}
-            else if(mnpriv==2){break;}
-        }
-        if(!status || p==q || q==npriv){
-            q=undefined;
-            p=undefined;
-            npriv=undefined;
-            alert("Non valido!!!");
-        }
+        if(!p || !q || !npriv){alert("Valori non inseriti!!!");}
+        else if(p<7 || q<7 || npriv<7){alert("Valore troppo piccolo!!!");}
         else{
-            for(;;){
-                npub++;
-                if((npub*npriv)%v==1 && npriv!=npub){break;}
+            if(p==q || q==npriv || p==npriv || !primo(p) || !primo(q) || !primo(npriv)){
+                alert("Non valido!!!");
             }
-            if(!chiaro){alert("Messaggio inesistente!!!");}
             else{
-                ascii=ascii_f(chiaro);
-                for(var i=0;i<ascii.length;i++){
-                    potenza=BigInt(ascii[i])**BigInt(npub);
-                    deascii[i]=Number(potenza%BigInt(n));
+                npub=chiave_pubblica(npub, npriv, v);
+                if(!chiaro){alert("Messaggio inesistente!!!");}
+                else{
+                    ascii=ascii_f(chiaro);
+                    deascii_crypto=encrypt(ascii, npub, n);
+                    deascii_chiaro=decrypt(deascii_crypto, npriv, n);
+                    crypto=deascii_f(deascii_crypto);
+                    decrypto=deascii_f(deascii_chiaro);
                 }
-                for(var i=0;i<deascii.length;i++){
-                    potenza=BigInt(deascii[i])**BigInt(npriv);
-                    ascii1[i]=Number(potenza%BigInt(n));
-                }
-                crypto=deascii_f(deascii);
-                chiaro1=deascii_f(ascii1)
-
             }
         }
     }
+    function primo(n){
+        let m=n;
+        for(;;){
+            m--;
+            if(n%m==0){return false;}
+            else if(m==2){return true;}
+        }
+    }
+    function chiave_pubblica(npub, npriv, v){
+        npub=0;
+        for(;;){
+            npub++;
+            if((npub*npriv)%v==1 && npriv!=npub){break;}
+        }
+        return npub;
+    }
     function ascii_f(chiaro){
         ascii = [];
-        deascii = [];
+        deascii_crypto = [];
+        deascii_chiaro = [];
         for(var i=0;i<chiaro.length;i++){
             const carattere = chiaro.charCodeAt(i);
             ascii.push(carattere);
         }
         return ascii;
+    }
+    function encrypt(ascii, npub, n){
+        let potenza;
+        for(var i=0;i<ascii.length;i++){
+            potenza=BigInt(ascii[i])**BigInt(npub);
+            deascii_crypto[i]=Number(potenza%BigInt(n));
+        }
+        return deascii_crypto;
+    }
+    function decrypt(deascii, npriv, n){
+        let potenza;
+        for(var i=0;i<deascii_crypto.length;i++){
+            potenza=BigInt(deascii_crypto[i])**BigInt(npriv);
+            deascii_chiaro[i]=Number(potenza%BigInt(n));
+        }
+        return deascii_chiaro;
     }
     function deascii_f(deascii){
         const crypto = String.fromCharCode(...deascii);
@@ -63,36 +70,22 @@
     }
 </script>
 
-<!--function ascii(chiaro){
-        chiaro = [];
-        for(var i=0;i<chiaro.length;i++){
-            const carattere = chiaro.charCodeAt(i);
-            chiaro.push(carattere);
-        }
-        return chiaro;
-    }
-    function deascii_f(ascii) {
-        const deascii = String.fromCharCode(...ascii);
-        return deascii;
-    }
--->
-
 <main>
-    <div>P:<input type="text" bind:value={p}></div>
-    <div>Q:<input type="text" bind:value={q}></div>
-    <div>Npriv:<input type="text" bind:value={npriv}></div>
-    <div>Npub:{npub}</div>
-    <div class="risultato">N: {n}</div>
-    <div class="risultato">V: {v}</div>
-    <div class="risultato">Kpriv:({n},{npriv})</div>
-    <div class="risultato">Kpub:({n},{npub})</div>
-    <div class="calcola">Messaggio: <input type="text" bind:value={chiaro}></div>
-    <div class="risultato">Chiaro:{chiaro}</div>
-    <div class="risultato">Cryptato:{crypto}</div>
-    <div class="risultato">Chiaro&#40;ASCII&#41;:{ascii}</div>
-    <div class="risultato">Cryptato&#40;ASCII&#41;:{deascii}</div>
-    <div class="risultato">Decryptato&#40;ASCII&#41;:{ascii1}</div>
-    <div class="risultato">Decryptato:{chiaro1}</div>
+    <div><span>P</span>:<input type="text" bind:value={p}></div>
+    <div><span>Q</span>:<input type="text" bind:value={q}></div>
+    <div><span>Npriv</span>:<input type="text" bind:value={npriv}></div>
+    <div><span>Npub</span>:{npub}</div>
+    <div class="risultato"><span>N</span>: {n}</div>
+    <div class="risultato"><span>V</span>: {v}</div>
+    <div class="risultato"><span>Kpriv</span>:({n},{npriv})</div>
+    <div class="risultato"><span>Kpub</span>:({n},{npub})</div>
+    <div class="calcola"><span>Messaggio</span>: <input type="text" bind:value={chiaro}></div>
+    <div class="risultato"><span>Chiaro</span>:<br>{chiaro}</div>
+    <div class="risultato"><span>Cryptato</span>:<br>{crypto}</div>
+    <div class="risultato"><span>Chiaro&#40;ASCII&#41;</span>:<br>{ascii}</div>
+    <div class="risultato"><span>Cryptato&#40;ASCII&#41;</span>:<br>{deascii_crypto}</div>
+    <div class="risultato"><span>Decryptato&#40;ASCII&#41;</span>:<br>{deascii_chiaro}</div>
+    <div class="risultato"><span>Decryptato</span>:<br>{decrypto}</div>
     <div><button class="calcola" on:click={calcola}>Calcola</button></div>
 </main>
 
@@ -100,6 +93,7 @@
     main{
         height: 80%;
         color: blue;
+        font-size: 50px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
@@ -120,6 +114,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-decoration: none;
     }
     div{
         width: 25%;
@@ -129,4 +124,5 @@
     .risultato{width: 50%;}
     .calcola{width: 100%;}
     .calcola input{width: 50%;}
+    span{text-decoration: underline;}
 </style>
