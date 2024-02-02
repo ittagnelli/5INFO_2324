@@ -14,7 +14,7 @@ man 7 tcp
 #define MAX_CONN 10
 
 /* man perror */
-void error(char *msg)
+void error(char *msg) 
 {
   perror(msg);
   exit(1);
@@ -87,8 +87,6 @@ int socket_send(int socket_fd, char *buf)
     return byte_sent;
 }
 
-
-
 int main(int argc, char **argv) 
 {
     unsigned short tcp_port; /* TCP port in ascolto */
@@ -96,7 +94,6 @@ int main(int argc, char **argv)
     int connection_fd;       /* connection socket file descriptor */
     char buf[BUFSIZE];       /* RX buffer */
     int msg_size;            /* dimensione messaggio ricevuto */
-    int byte_sent;           /*per rimandare il messaggio*/
 
     /* Verifico la presenza del parametro porta e lo leggo*/ 
     if(argc != 2) {
@@ -121,17 +118,14 @@ int main(int argc, char **argv)
         connection_fd = socket_accept(socket_fd);
 
         msg_size = socket_receive(connection_fd, buf);
-        printf("TCP server ha ricevuto %d byte: %s\n", msg_size, buf);
-        printf("Rimandiamo indietro il messaggio\n");
-        msg_size = socket_send(connection_fd, buf);
-
+        printf("Frase ricevuta: %s\n", buf);
+        printf("Rimando indietro la frase: %s\n", buf);
         if(socket_send(connection_fd, buf)==0){
             printf("Nessun dato inviato");
         }
-
+        printf("------------------------------\n\n");
 
         /* chiudo la connessione con il client */
         close(connection_fd);
-
     }
-}
+}   

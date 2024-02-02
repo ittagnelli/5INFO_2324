@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
@@ -6,12 +7,12 @@
 #include <string.h>
 #include <unistd.h>
 
-#define BUFSIZE 1024
-
 /* 
 man 7 ip
 man 7 tcp
  */
+
+#define BUFSIZE 1024
 
 /* man perror */
 void error(char *msg) 
@@ -64,6 +65,20 @@ int socket_send(int socket_fd, char *buf)
     return byte_sent;
 }
 
+int socket_accept(int socket_fd) 
+{
+    int connection_fd;
+    struct sockaddr_in clientaddr; /* client address */
+    socklen_t clientlen = sizeof(clientaddr);
+    
+    /* accetta una connessione TCP da un client */
+    if((connection_fd = accept(socket_fd, 
+                            (struct sockaddr *) &clientaddr, 
+                            &clientlen)) < 0)
+        error("Errore nella fase di accept");
+    return connection_fd;
+}
+
 int socket_receive(int socket_fd, char *buf)
 {
     int msg_size;
@@ -75,9 +90,6 @@ int socket_receive(int socket_fd, char *buf)
     return msg_size;
 }
 
-
-
-
 int main(int argc, char **argv) 
 {
     unsigned short tcp_port; /* porta tcp di destinazione */
@@ -87,8 +99,6 @@ int main(int argc, char **argv)
     char buf[BUFSIZE];       /* RX buffer */
     int connection_fd;       /* connection socket file descriptor */
     int msg_size;            /* dimensione messaggio ricevuto */
-
-    
 
     /* Verifico la presenza dei parametre IP e porta */ 
     if(argc != 4) {
@@ -107,19 +117,16 @@ int main(int argc, char **argv)
     socket_connect(socket_fd, ip, tcp_port);
     printf("Socket connesso con il server %s sulla porta %d\n", ip, tcp_port);
 
-    /* invio sul socket la stringa */
-     byte_sent = socket_send(socket_fd, argv[3]); 
-
+    // invia dati
+    byte_sent = socket_send(socket_fd, strcat(argv[3], "\n"));
+    // per comunicare con il server java ho messo argv in un strcat 
     printf("Messaggio inviato  successo: %s\n", argv[3]);
 
-    msg_size = socket_receive(socket_fd, buf); 
+    // riceve la connessione
+    msg_size = socket_receive(socket_fd, buf);  
+    printf("Messaggio rinviato  successo: %s\n", buf);
 
-
-    printf("Messaggio rinviato con successo: %s\n", buf);
+    printf("----------------------------------------\n\n");
 
     close(socket_fd);
-
-
-        /* metto il socket in ascolto */
-    
 }

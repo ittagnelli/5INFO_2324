@@ -1,3 +1,7 @@
+<script>
+	import Banner from '../../components/Banner.svelte';
+</script>
+
 <svelte:head>
 	<title>About</title>
 	<meta name="description" content="About this app" />
@@ -23,4 +27,6 @@
 		The <a href="/sverdle">Sverdle</a> page illustrates SvelteKit's data loading and form handling. Try
 		using it with JavaScript disabled!
 	</p>
+
+	<Banner/>
 </div>

@@ -23,8 +23,16 @@ public class rizzolo_tcp_server {
 
                 /* gestisco la connessione e leggo il messaggio */   
                 InputStream input = client_connection.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                String messaggio = reader.readLine();
+                // BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                // System.out.format("ok ricevuto");
+                // String messaggio = reader.readLine();
+                String messaggio = "";
+                do{
+                    int c = input.read();
+                    if(c>-1){
+                        messaggio += (char) c;
+                    }
+                }while(input.available() > 0);
 
                 System.out.format("Java TCP server ha ricevuto %d byte: %s\n", messaggio.length(), messaggio);
 

@@ -95,7 +95,7 @@ int main(int argc, char **argv)
 
     printf("Inviato %d bytes con successo a %s\n", byte_sent, ip);
     
-    msg_size = socket_receive(socket_fd, buf); 
+    byte_sent = socket_receive(socket_fd, buf); 
 
 
     printf("Messaggio rinviato con successo: %s\n", buf);
