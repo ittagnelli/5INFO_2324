@@ -8,13 +8,7 @@ function prodotto(num1, num2){
     return num1*num2;
 }
 function potenza(num1, num2){
-    if(num1 == 0 & num2 == 0){
-        console.log("impossibile");
-        return;
-    }
-    else{
-        return num1**num2;
-    }
+    return num1**num2;
 }
 
 console.log("Somma 3 e 4: ", callback_function(3,4, somma));
