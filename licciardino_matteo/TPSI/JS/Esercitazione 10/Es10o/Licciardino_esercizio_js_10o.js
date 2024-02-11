@@ -1,4 +1,4 @@
-let frase = "Facciamo tanti esercizi che ci fanno bene";
+let frase = "Facciamo tanti i che ci fanno bene";
 let L = 10;
 
 function tronca(frase, L) {
