@@ -1,13 +1,13 @@
 function genera() {
-    let caratteriPossibili = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let caratt = 'abcdefghijklmnopqrstuvwxyz0123456789';
     let lunghezzaArray = 7;
     let risultato = [];
     
     for (let i = 0; i < lunghezzaArray; i++) {
       
-        let indiceCasuale = Math.floor(Math.random() * caratteriPossibili.length);
+        let index = Math.floor(Math.random() * caratt.length);
 
-        risultato.push(caratteriPossibili[indiceCasuale]);
+        risultato.push(caratt[index]);
     }
     
     return risultato;
