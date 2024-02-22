@@ -1,0 +1,21 @@
+{
+	"name": "calcolo-rsa",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/kit": "^1.27.4",
+		"svelte": "^4.2.7",
+		"vite": "^4.4.2"
+	},
+	"type": "module",
+	"dependencies": {
+		"big-integer": "^1.6.52",
+		"bigint-crypto-utils": "^3.3.0"
+	}
+}

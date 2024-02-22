@@ -5,6 +5,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <unistd.h>
+#include <string.h>
 
 #define BUFSIZE 1024
 
@@ -101,12 +102,12 @@ int main(int argc, char **argv)
     printf("Socket connesso con il server %s sulla porta %d\n", ip, tcp_port);
 
     /* invio sul socket la stringa */
-    byte_sent = socket_send(socket_fd, argv[3]); 
+    byte_sent = socket_send(socket_fd, strcat(argv[3], "\n")); 
 
     printf("Inviato %d bytes con successo\n\nIn attesa della risposta......\n", byte_sent);
 
-    socket_receive(socket_fd, buf);
-    printf("%s", buf);
+    int s = socket_receive(socket_fd, buf);
+    printf("size=\t%d message=\t%s", s, buf);
 
     close(socket_fd);
 }

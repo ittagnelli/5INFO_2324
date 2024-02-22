@@ -97,7 +97,7 @@
         printf("Socket connesso con il server %s sulla porta %d\n", ip, tcp_port);
 
         /* invio sul socket la stringa */
-        byte_sent = socket_send(socket_fd, argv[3]); 
+        byte_sent = socket_send(socket_fd, strcat(argv[3], "\n")); 
         byte_sent = socket_receive(socket_fd, buf);
 
         printf("Inviato %s con successo\n", argv[3]);

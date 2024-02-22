@@ -1,0 +1,21 @@
+Come utente A dobbiamo svolgere i seguenti passaggi
+
+Scegliamo un messaggio da mandare: "Compra le carote"
+
+Lo scriviamo nel file |cognome|_es1_clear.txt
+
+Generiamo una chiave di criptazione e un IV: "3d4325a3676f34bb" "be1d78bd53f11a02"
+
+Scriviamo nel terminale il comando "openssl enc -des -e  -K 3d4325a3676f34bb  -iv be1d78bd53f11a02  -a -provider legacy -provider default  -in putignano_es1_clear.txt -out putignano_es1_chyper.txt"
+
+Inseriamo la chiave di criptazione come richiesto
+
+Scriviamo nel terminale il comando "openssl enc -des -e  -K 3d4325a3676f34bb  -iv be1d78bd53f11a02 -a -provider legacy -provider default -in putignano_es1_chyper.txt  | nc -N 10.10.10.115 8080" per inviare il file all'indirizzo 10.10.10.115 in ascolto sulla prta 8080
+
+attendere che l'utente B decifri il messaggio e mandi indietro lo stesso messaggio
+
+Scriviamo nel terminale il comando "nc -l 8080 | openssl enc -des -d  -K 3d4325a3676f34bb  -iv be1d78bd53f11a02 -a -provider legacy -provider default > ricevuto.txt" per metterci in ascolto sulla porta 8080
+
+Una volta ricevuto il messaggio scrivo sul terminale il comando "openssl enc -des -d  -K 3d4325a3676f34bb  -iv be1d78bd53f11a02  -a -provider legacy -provider default  -in ricevuto.txt -out ricevuto_clear.txt" per decifrare il messaggio
+
+Confrontiamo il messaggio ricevuto e il messaggio mandato e verifichiamo che siano uguali tra loro.

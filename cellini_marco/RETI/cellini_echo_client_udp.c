@@ -44,7 +44,7 @@ int socket_send(int socket_fd, char *ip, unsigned short port, char *buf)
     serveraddr.sin_port = htons(port);
     serveraddr.sin_addr.s_addr = inet_addr(ip);
 
-   if((byte_sent = sendto(socket_fd, buf, strlen(buf), 0,
+   if((byte_sent = sendto(socket_fd, buf, strlen(buf), MSG_CONFIRM,
          (struct sockaddr*)&serveraddr, sizeof(serveraddr))) < 0)
          error("Errore nell'invio dati");
     
@@ -55,7 +55,11 @@ int wait_receive(int socket_fd, char *buf) {
     int byte_receive;
     struct sockaddr_in clientaddr;
     socklen_t client_struct_len;
-    if ((byte_receive = recvfrom(socket_fd, buf, BUFSIZE, 0,
+
+    bzero(buf, BUFSIZE);
+
+    client_struct_len = sizeof(clientaddr);
+    if ((byte_receive = recvfrom(socket_fd, buf, BUFSIZE, MSG_WAITALL,
          (struct sockaddr*)&clientaddr, &client_struct_len)) < 0)
         error("Errore nella ricezione dati");
     return byte_receive;

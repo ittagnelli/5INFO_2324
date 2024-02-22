@@ -1,0 +1,2 @@
+nc -l 8080 | openssl enc -des -d  -K lkaewgufbeuzshvf,bzuesvmgfesgduzwyguaikrqwg  -iv poilkjmnbqweasdz  \\
+-a -provider legacy -provider default > input.txt
