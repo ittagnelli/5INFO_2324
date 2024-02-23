@@ -1,5 +1,6 @@
 <script>
     export let prio = 3;
+    export let disabled = false
 
     const prio2str = (prio) => {
         let map = {
@@ -11,15 +12,21 @@
     }
 
     const change_prio = () => {
+        if(!disabled)
         prio = (prio + 1) % 3 + 1;
     }
 </script>
 
-<span class={prio2str(prio)} on:click={change_prio}>
+<span class={disabled? 'DISABILITATO' : prio2str(prio)} on:click={change_prio}>
     {prio2str(prio)}
 </span>
 
 <style>
+
+    .DISABILITATO {
+        background-color: grey;
+    }
+
     span{
         display: inline-block;
         border-radius: 5px;
