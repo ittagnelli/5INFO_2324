@@ -21,8 +21,6 @@ class poligono {
             case 8:
                 return (this.perimetro() * (this.len * 0.866)) / 2; break;
             
-            
-
             default:
                 return null;
                 break;
