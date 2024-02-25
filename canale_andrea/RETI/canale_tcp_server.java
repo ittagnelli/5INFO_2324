@@ -7,7 +7,7 @@ public class canale_tcp_server {
     public static void main(String[] args) {
         ServerSocket server_socket;
         Socket client_connection;
-
+        
         /* Verifico la presenza del parametro porta e lo leggo */
         if (args.length != 1) {
             System.out.println("uso: tcp_server <PORT>");

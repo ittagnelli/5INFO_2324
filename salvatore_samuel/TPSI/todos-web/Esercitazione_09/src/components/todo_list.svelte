@@ -1,52 +1,34 @@
 <script>
     import Icon from "./icon.svelte";
     import TodoItem from "./todo_item.svelte";
+
+    let todos = [];
+    let last_id = 0;
+
+    const create_todo = async () => {
+        let todo = {
+            id: ++last_id,
+            task: '',
+            done: false,
+            priority: 3
+        };
+        console.log("CREATE:", todo);
+
+        todos =[...todos, todo];
+    }
 </script>
 
 <h1>ToDos</h1>
 <div class="todo-list">
-    <div class="header"><Icon/></div>
-    <div class="header"><Icon/></div>
-    <div class="header"><Icon/></div>
-    <div class="header"><Icon/></div>
-    <div class="header"><Icon/></div>
- 
-<TodoItem/>
+    <div class="header"><Icon name="tag" /></div>
+    <div class="header"><Icon name="task_all" /></div>
+    <div class="header"><Icon name="list" /></div>
+    <div class="header"><Icon name="schedule" /></div>
+    <div class="header"><Icon name="add_box" handler={create_todo}/></div>
 
-<TodoItem/>
-
-<TodoItem/>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
+    {#each  todos as todo}
+        <TodoItem todo={todo} />
+    {/each}
 </div>
 <style>
     .todo-list{

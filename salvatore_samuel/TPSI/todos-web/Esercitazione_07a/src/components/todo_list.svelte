@@ -1,51 +1,44 @@
 <script>
     import Icon from "./icon.svelte";
     import TodoItem from "./todo_item.svelte";
+
+    let todos = [
+        {
+            id: 1,
+            task: "Studiare TPSI",
+            done: false,
+            priority: 1
+        },
+    
+        {
+            id: 2,
+            task: "Studiare RETI",
+            done: false,
+            priority: 2
+        },
+
+        {
+            id: 3,
+            task: "Studiare Informatica",
+            done: false,
+            priority: 3
+        },
+    ]
 </script>
 
 <h1>ToDos</h1>
 <div class="todo-list">
-    <div class="header"><Icon/></div>
-    <div class="header"><Icon/></div>
-    <div class="header"><Icon/></div>
-    <div class="header"><Icon/></div>
-    <div class="header"><Icon/></div>
+    <div class="header"><Icon name="tag" /></div>
+    <div class="header"><Icon name="task_all" /></div>
+    <div class="header"><Icon name="list" /></div>
+    <div class="header"><Icon name="schedule" /></div>
+    <div class="header"><Icon name="add_box" /></div>
  
-<TodoItem/>
+    <TodoItem todo={todos[0]}/>
 
-<TodoItem/>
+    <TodoItem todo={todos[1]}/>
 
-<TodoItem/>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
-
-<div>CELLA 1</div>
-<div>CELLA 2</div>
-<div>CELLA 3</div>
-<div>CELLA 4</div>
-<div>CELLA 5</div>
+    <TodoItem todo={todos[2]}/>
 
 </div>
 <style>

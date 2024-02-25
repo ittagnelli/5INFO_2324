@@ -8,10 +8,11 @@
 <script>
     export let name;
     export let handler = () => {}; //handler di default
+    export let color="green";
 </script>
 
-<span class="material-icons-outlined icon" on:click={handler}>
-    {name}
+<span class="material-icons-outlined icon" on:click={handler} style="--color:{color};">
+    {name} 
 </span>
 
 
@@ -20,6 +21,7 @@
 
     .icon{
         font-size: 32px;
+        color: var(--color);
     }
 
     .icon:hover{
