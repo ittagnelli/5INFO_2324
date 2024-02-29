@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+
+    <style>
+        form {
+            width: 5%;
+            display: grid;
+            grid-template-columns: 1fr;
+            row-gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form id="dati">
+        <label for="nome">Nome</label><input type="text" id="name">
+        <label for="cognome">Cognome</label><input type="text" id="surname">
+        <label for="eta">Età</label><input type="text" id="age">
+        <label for="capelli">Colore capelli</label><input type="text" id="hair_color">
+        <input type="submit" value="Invia" onclick="process_form()">
+    </form>
+
+    <div id="output"></div>
+    <div id="output2"></div>
+
+    <script src="cellini_esercizio_js_45.js"></script>
+</body>
+</html>
