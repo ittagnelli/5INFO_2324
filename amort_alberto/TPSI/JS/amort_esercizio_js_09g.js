@@ -37,7 +37,6 @@ let calcolo = function(d1, d2, d3)
         }
         {console.log(` ${d2.secondi} secondi, ${d2.minuti} minuti, ${d2.ore} ore`)}
     }
-    {console.log}
 
     
 
@@ -54,6 +53,6 @@ let orario = function( secondi, minuti , ore ) {
 
 
 calcolo(new orario("18", "4", "18"), new orario("5", "7", "14"), new orario("11", "25", "14"));
-let or3= new orario("11", "25", "26", "16");
-let or4= new orario("5", "7", "13", "5");
-calcolo(or1, or2);
+let or3= new orario("11", "25", "21");
+let or4= new orario("5", "7", "13");
+calcolo(or3, or4);

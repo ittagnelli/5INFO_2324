@@ -3,7 +3,7 @@ let enumera= function() {
 
 }
 
-let Automobili= function( targa, propietario, prezzo, enumera){
+let Automobili= function( targa, propietario, prezzo){
     (this.targa=targa),
     (this.propietario=propietario),
     (this.prezzo=prezzo),
@@ -18,7 +18,7 @@ let Automobili= function( targa, propietario, prezzo, enumera){
         
     }),
 
-    (this.enumera= enumera)
+    (this.enumera = enumera)
     
 };
 
@@ -32,10 +32,10 @@ let Animale= function(specie, nome_scientifico, sesso)
     }),
     (this.recinto= function() {
         console.log(`Va nel recinto dei ${this.specie} `);
-    }
-    (this.enumera= enumera)
+    }),
+    (this.enumera=enumera)
 
-    )
+    
 
 };
 

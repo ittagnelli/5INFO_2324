@@ -1,13 +1,16 @@
-let Automobile= function(persone, velocità, rapporto_v, accensione)
+class Automobile
 {
+    constructor(persone, velocità, rapporto_v, accensione)
+    {
     this.persone=persone;
     this.velocità=velocità;
     this.rapporto_v=rapporto_v; 
     this.pulsante=accensione;
+    }
 
-    this.Personeabordo=function(n)
+    Personeabordo(n)
     {
-        if(this.velocità>0)
+        if(this.velocità>0 && this.pulsante==true)
         {
             console.log("Impossibile modificare il numero di persone")
         }
@@ -18,7 +21,7 @@ let Automobile= function(persone, velocità, rapporto_v, accensione)
 
     }
 
-    this.Impostarevelocità=function(n)
+    Impostarevelocità(n)
     {
         if(n<this.velocità+30 && n>this.velocità-30)
         {
@@ -31,8 +34,8 @@ let Automobile= function(persone, velocità, rapporto_v, accensione)
 
     }
 
-    this.aumentarapporto()=function()
-    {
+    aumentarapporto()
+     {
         if (this.rapporto_v<6)
         {
             this.rapporto_v++;
@@ -40,7 +43,7 @@ let Automobile= function(persone, velocità, rapporto_v, accensione)
 
     }
 
-    this.diminuiscirapporto()=function()
+    diminuiscirapporto()
     {
         if (this.rapporto_v<6)
         {
@@ -50,19 +53,18 @@ let Automobile= function(persone, velocità, rapporto_v, accensione)
 
     }
 
-    this.pulsante()
+    premi()
     {
-        this.pulsante=!this.pulsante
+        this.pulsante=!this.pulsante;
+        return this.pulsante;
     }
-    this.stampa()= function()
+    stampa()
     {
-        console.log(this)
+        console.log(this);
     }
 
 
 }
-
-const main = () => {
 
 
 let persone=1;
@@ -70,13 +72,12 @@ let velocità=1;
 let rapporto_v=2;
 let accensione=false
 
-if (persone<5 && persone>0 && velocità>0 && velocità<180 && rapporto_v>1 && rapporto_v<6)
- {
+
 
 let automobile = new Automobile(persone, velocità, rapporto_v, accensione);
 
-automobile.pulsante();
-if(pulsante==true)
+let p=automobile.premi();
+if(p==true)
 {
     automobile.Personeabordo(2)
     automobile.Impostarevelocità(40)
@@ -86,8 +87,7 @@ if(pulsante==true)
 automobile.stampa();
 
 
-}
 
-}
-main();
+
+
 

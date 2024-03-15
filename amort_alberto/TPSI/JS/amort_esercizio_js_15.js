@@ -2,7 +2,7 @@ let cancella= function(array, N)
 {
     while(array.indexOf(N)!=-1)
     {
-        array=(array.slice(0, array.indexOf(N))).concat(array.slice(N, array.length));
+        array=(array.slice(0, array.indexOf(N))).concat(array.slice(N));
     }
     return array;
 }

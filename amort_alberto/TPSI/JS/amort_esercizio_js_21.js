@@ -9,7 +9,7 @@ let crea_array= function(array, N)
 
     for(const [i, item] of array.entries())
     {
-        if(item%5==0)
+        if(item%N==0)
         {
             array[i]=0;
         }
