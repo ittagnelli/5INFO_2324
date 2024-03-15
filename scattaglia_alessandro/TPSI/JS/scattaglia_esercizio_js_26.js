@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 function array_rev(N) {
 
     let array = [];
