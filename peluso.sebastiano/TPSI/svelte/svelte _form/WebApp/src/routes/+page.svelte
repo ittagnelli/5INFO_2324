@@ -52,9 +52,27 @@
 
 <style>
 
+    form{
+        width: 50%;
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        row-gap: 15px;
+    }
+    input, label{
+        height: 25px;
+        border-radius: 6px;
+    }
+    label{
+        line-height: 25px;
+    }
+
     p{
         color: red;
         font: bold;
+    }
+
+    .hidden{
+        display: none;
     }
 
 </style>
