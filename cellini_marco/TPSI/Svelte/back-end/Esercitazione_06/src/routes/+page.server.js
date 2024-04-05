@@ -30,6 +30,7 @@ export const actions = {
     create: async ({ cookies, request }) => {
         const data = await request.formData();
         console.log("I valori del form sono: ", data);
+        console.log('Create');
 
         const user = {
             nome: data.get('nome'),
@@ -39,8 +40,33 @@ export const actions = {
 
         if (user.nome && user.cognome && user.eta) {
             const res = query_run(connect_to_db("./USER.db"), 'INSERT INTO Utente(nome, cognome, eta) VALUES(@nome, @cognome, @eta)', {nome: user.nome, cognome: user.cognome, eta: +user.eta});
-        }
-        else
+        } else
             return { form_error: true, form_vals: user };
+    },
+
+    update: async ({ cookies, request }) => {
+        const data = await request.formData();
+        console.log("I valori del form sono: ", data);
+        console.log('Update');
+
+        const user = {
+            id: data.get('id'),
+            nome: data.get('nome'),
+            cognome: data.get('cognome'),
+            eta: data.get('eta')
+        };
+
+        if (user.nome && user.cognome && user.eta) {
+            const res = query_run(connect_to_db("./USER.db"), 'UPDATE Utente SET nome=@nome, cognome=@cognome, eta=@eta WHERE id=@id', {id: +user.id, nome: user.nome, cognome: user.cognome, eta: +user.eta});
+        } else
+            return { form_error: true, form_vals: user };
+    },
+
+    delete: async ({ cookies, request }) => {
+        const data = await request.formData();
+        console.log("I valori del form sono: ", data);
+        console.log('delete');
+
+        const res = query_run(connect_to_db('./USER.db'), 'DELETE FROM Utente WHERE id=@id', {id: +data.get('id')});
     }
 };

@@ -1,10 +1,12 @@
 <script>
     export let data;
     export let form;
-    let nome,
+    let id,
+        nome,
         cognome,
         eta,
         error = false;
+    let action = 'create';
 
     if (form?.form_error) {
         error = true;
@@ -14,12 +16,23 @@
     }
 
     console.log(form);
+
+    const edit_user = (user) => {
+        action = 'update';
+        id = user.id;
+        nome = user.nome;
+        cognome = user.cognome;
+        eta = user.eta;
+    };
 </script>
 
 <div class="container">
     <h1>Welcome to SvelteKit</h1>
 
-    <form method="POST" action="?/create">
+    <form method="POST" action="?/{action}">
+        {#if action === 'update'}
+            <input type="hidden" name="id" bind:value={id} />
+        {/if}
         <div><label for="nome">Nome</label></div>
         <div>
             <input
@@ -81,7 +94,7 @@
                     <td>{utente.cognome}</td>
                     <td>{utente.eta}</td>
                     <td>
-                        <buttun class="edit">Edit</buttun>
+                        <buttun class="edit" on:click={() => edit_user(utente)}>Edit</buttun>
                     </td>
                     <td>
                         <buttun class="remove">Remove</buttun>
@@ -128,6 +141,7 @@
         width: 100%;
         height: 30px;
         font-weight: bolder;
+        cursor: pointer;
     }
 
     .remove {
