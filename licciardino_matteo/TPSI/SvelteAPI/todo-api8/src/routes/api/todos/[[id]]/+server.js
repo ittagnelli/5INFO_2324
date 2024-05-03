@@ -9,13 +9,22 @@ let todos = [
     }
 ];
 
-export async function GET({ params, request }){
+export async function GET({ params, request, url }){
     console.log("Ricevuto HTTP GET con parametro:", params);
 
     if(params.id){
         const todo = todos.filter(t => t.id == params.id)[0];
+        
         return json(todo);
     } else {
+        let res = todos;
+
+        if(url.searchParams.has('priority')){
+            res = todos.filter(t => t.priority == +url.searchParams.get('priority'));
+        } else if(url.searchParams.has('done')){
+            res = todos.filter(t => t.done == (url.searchParams.get('done') === 'true'))
+        }
+
         return json(todos);
     }
 }
