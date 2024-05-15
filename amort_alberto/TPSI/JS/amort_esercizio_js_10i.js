@@ -1,5 +1,5 @@
 let cerca_parole = function(stringa){
-    if(stringa.includes("coding")==true && stringa.includes("creativo"))
+    if(stringa.includes("coding") && stringa.includes("creativo"))
     {
         return stringa;
     }

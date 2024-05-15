@@ -1,8 +1,8 @@
 let cambia_ordine= function(library)
 {
-     library= library.sort((l1, l2) => l1.title.localeCompare(l2.title));
+     library= library.sort((l1, l2) => l2.title-l1.title);
     
-     return library.reverse();
+     return library;
 }
 var library = [ 
     { author: 'Bill Gates', title: 'The Road Ahead', libraryID: 1254},

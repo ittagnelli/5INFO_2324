@@ -1,6 +1,6 @@
 
 let remove= function(str1, str2){
-    str1=str1.replace(str2, "");
+    str1=str1.replace(" "+str2, "");
     return str1; 
     
 }

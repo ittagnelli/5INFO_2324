@@ -1,6 +1,6 @@
 
 let concatenazione = function(str1, str2){
-    str_finale=str2.substring(0, 2) + str1.substring(2, str1.length) + " " + str1.substring(0,2) + str2.substring(2, str2.length);
+    str_finale=str2.substring(0, 1) + str1.substring(1) + " " + str1.substring(0,1) + str2.substring(1);
     return str_finale;
 }
 

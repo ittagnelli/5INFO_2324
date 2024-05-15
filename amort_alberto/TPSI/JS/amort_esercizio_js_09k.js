@@ -3,7 +3,7 @@ let Automobile= function(persone, velocità, rapporto_v, accensione)
     this.persone=persone;
     this.velocità=velocità;
     this.rapporto_v=rapporto_v; 
-    this.accensione=accensione
+    this.pulsante=accensione;
 
     this.Personeabordo=function(n)
     {
@@ -65,9 +65,9 @@ let Automobile= function(persone, velocità, rapporto_v, accensione)
 const main = () => {
 
 
-let persone=0;
-let velocità=0;
-let rapporto_v=1;
+let persone=1;
+let velocità=1;
+let rapporto_v=2;
 let accensione=false
 
 if (persone<5 && persone>0 && velocità>0 && velocità<180 && rapporto_v>1 && rapporto_v<6)
@@ -83,11 +83,11 @@ if(pulsante==true)
     automobile.aumentarapporto(); 
     automobile.diminuiscirapporto();
 }
-
-}
-
 automobile.stampa();
+
+
 }
 
+}
 main();
 

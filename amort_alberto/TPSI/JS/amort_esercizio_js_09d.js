@@ -5,7 +5,7 @@ let numero= function(n)
     (this.numero=n),
     (this.calcola=function(){
         let somma=0;
-        for(let i=0; i<=n; i++)
+        for(let i=0; i<=this.numero; i++)
         {somma += i;}
         console.log(`Somma: ${somma} `);
     }
