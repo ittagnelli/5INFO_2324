@@ -1,0 +1,6 @@
+Table Utente{
+  id integer [primary key]
+  nome varchar
+  cognome varchar
+  eta integer
+}

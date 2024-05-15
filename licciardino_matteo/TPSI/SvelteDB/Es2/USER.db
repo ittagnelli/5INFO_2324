@@ -1,0 +1,7 @@
+CREATE TABLE "Utente" (
+	"id"	INTEGER,
+	"nome"	TEXT,
+	"cognome"	TEXT,
+	"eta"	INTEGER,
+	PRIMARY KEY("id")
+);
